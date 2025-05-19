@@ -22,7 +22,6 @@ function resolveName(code) {
   if (code === "KSA") return "Saudi Arabia";
   if (code === "UAE") return "United Arab Emirates";
 
-  // Default fallback
   return code.charAt(0).toUpperCase() + code.slice(1).toLowerCase();
 }
 
@@ -78,10 +77,10 @@ function calculatePrice() {
   const destinationName = resolveName(destInput);
 
   document.getElementById("result").textContent =
-    `The Price Per Kilo From ${originName} To ${destinationName} Is: ${price} AED`;
+    `The Price Per Kilo From ${originName} To ${destinationName} Is: AED ${price}`;
 }
 
-// Swap cities
+// Swap input values
 function swapCities() {
   const origin = document.getElementById("origin").value;
   const destination = document.getElementById("destination").value;
@@ -90,9 +89,16 @@ function swapCities() {
   calculatePrice();
 }
 
-// Clear fields
+// Clear form
 function clearFields() {
   document.getElementById("origin").value = "";
   document.getElementById("destination").value = "";
   document.getElementById("result").textContent = "";
 }
+
+// 🔑 Trigger calculation on Enter key press
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    calculatePrice();
+  }
+});
