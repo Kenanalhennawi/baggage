@@ -288,6 +288,7 @@
     "DXB": "Dubai",
     "AUH": "Abu Dhabi",
     "BAH": "Bahrain",
+    "FRU": "Bishkek"
     "DOH": "Doha",
     "KWI": "Kuwait",
     "JED": "Jeddah",
@@ -304,6 +305,8 @@
     "DEL": "Delhi",
     "KHI": "Karachi",
     "DAC": "Dhaka",
+    "LRR": "Lar",
+"UFA": "Ufa"
     "BKK": "Bangkok",
     "LGK": "Langkawi",
     "PEN": "Penang",
@@ -421,6 +424,7 @@
   "iata_to_country": {
     "AE": "United Arab Emirates",
     "QA": "Qatar",
+    "KG": "Kyrgyzstan"
     "SA": "Saudi Arabia",
     "EG": "Egypt",
     "ET": "Ethiopia",
