@@ -1,6 +1,6 @@
-
 let data = null;
 
+// Load data.json
 fetch("data.json")
   .then((res) => res.json())
   .then((json) => {
@@ -11,19 +11,26 @@ fetch("data.json")
       "Failed to load data.json: " + err;
   });
 
+// Resolve display name from IATA or country code
 function resolveName(code) {
   if (!data) return code;
   code = code.trim().toUpperCase();
+
   if (data.iata_to_city[code]) return data.iata_to_city[code];
   if (data.iata_to_country[code]) return data.iata_to_country[code];
+
   if (code === "KSA") return "Saudi Arabia";
   if (code === "UAE") return "United Arab Emirates";
+
+  // Default fallback
   return code.charAt(0).toUpperCase() + code.slice(1).toLowerCase();
 }
 
+// Get zone number by matching city/country/code
 function getZone(input) {
   if (!data) return null;
   input = input.trim().toLowerCase();
+
   for (const [zone, places] of Object.entries(data.destinations)) {
     for (const key in places) {
       const value = places[key];
@@ -38,6 +45,7 @@ function getZone(input) {
   return null;
 }
 
+// Main function to calculate baggage price
 function calculatePrice() {
   if (!data) {
     document.getElementById("result").textContent =
@@ -69,9 +77,11 @@ function calculatePrice() {
   const originName = resolveName(originInput);
   const destinationName = resolveName(destInput);
 
-  document.getElementById("result").textContent = `The Price Per Kilo From ${originName} To ${destinationName} Is: AED ${price}`;
+  document.getElementById("result").textContent =
+    `The Price Per Kilo From ${originName} To ${destinationName} Is: ${price} AED`;
 }
 
+// Swap cities
 function swapCities() {
   const origin = document.getElementById("origin").value;
   const destination = document.getElementById("destination").value;
@@ -80,6 +90,7 @@ function swapCities() {
   calculatePrice();
 }
 
+// Clear fields
 function clearFields() {
   document.getElementById("origin").value = "";
   document.getElementById("destination").value = "";
