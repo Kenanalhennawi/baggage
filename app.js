@@ -52,8 +52,19 @@ function calculatePrice() {
     return;
   }
 
-  const originInput = document.getElementById("origin").value;
-  const destInput = document.getElementById("destination").value;
+  const originInput = document.getElementById("origin").value.trim();
+  const destInput = document.getElementById("destination").value.trim();
+  const origin = originInput.toUpperCase();
+  const destination = destInput.toUpperCase();
+
+  // 🔒 Special rule for ASMARA
+  if (origin === "ASM" || origin === "ASMARA" || destination === "ASM" || destination === "ASMARA") {
+    const originName = resolveName(originInput);
+    const destinationName = resolveName(destInput);
+    document.getElementById("result").textContent =
+      `The Price Per Kilo From ${originName} To ${destinationName} Is: 80 AED`;
+    return;
+  }
 
   const zone1 = getZone(originInput);
   const zone2 = getZone(destInput);
@@ -77,7 +88,7 @@ function calculatePrice() {
   const destinationName = resolveName(destInput);
 
   document.getElementById("result").textContent =
-    `The Price Per Kilo From ${originName} To ${destinationName} Is: AED ${price}`;
+    `The Price Per Kilo From ${originName} To ${destinationName} Is: ${price} AED`;
 }
 
 // Swap input values
